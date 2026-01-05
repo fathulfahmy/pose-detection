@@ -166,9 +166,8 @@ Project Link: [https://github.com/fathulfahmy/pose-detection](https://github.com
 
 ## Acknowledgments
 
-- []()
-- []()
-- []()
+- [Mediapipe Object Detection Guide](https://ai.google.dev/edge/mediapipe/solutions/vision/object_detector/python)
+- [Mediapipe Pose Landmark Guide](https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker/python)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
