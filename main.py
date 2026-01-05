@@ -4,6 +4,7 @@ from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 import numpy as np
 
+# https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker#pose_landmarker_model
 POSE_CONNECTIONS = [
     # FACE
     (0, 1),
@@ -54,13 +55,11 @@ LANDMARK_RADIUS = 5
 LANDMARK_THICKNESS = 1
 LANDMARK_COLOR = (255, 0, 0)
 
-# ==========================================================
-# OBJECT DETECTOR
-# ==========================================================
-
 
 def create_object_detector():
+    # https://ai.google.dev/edge/mediapipe/solutions/vision/object_detector/python#create_the_task
     base_options = python.BaseOptions(
+        # DOWNLOAD MODELS: https://ai.google.dev/edge/mediapipe/solutions/vision/object_detector#models
         model_asset_path="models/efficientdet_lite0.tflite"
     )
     options = vision.ObjectDetectorOptions(
@@ -71,13 +70,10 @@ def create_object_detector():
     return vision.ObjectDetector.create_from_options(options)
 
 
-# ==========================================================
-# POSE LANDMARKER
-# ==========================================================
-
-
 def create_pose_landmarker():
+    # https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker/python#create_the_task
     base_options = python.BaseOptions(
+        # DOWNLOAD MODELS: https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker#models
         model_asset_path="models/pose_landmarker_lite.task"
     )
     options = vision.PoseLandmarkerOptions(
@@ -90,6 +86,7 @@ def main():
     object_detector = create_object_detector()
     pose_landmarker = create_pose_landmarker()
 
+    # https://docs.opencv.org/4.x/d8/dfe/classcv_1_1VideoCapture.html
     cap = cv2.VideoCapture(0)
 
     while cap.isOpened():
@@ -97,12 +94,13 @@ def main():
         if not ret:
             break
 
-        # detect object
+        # DETECT OBJECT
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=frame)
         object_detection_result = object_detector.detect(mp_image)
 
         for object_detection in object_detection_result.detections:
+            # https://ai.google.dev/edge/mediapipe/solutions/vision/object_detector/python#handle_and_display_results
             bbox = object_detection.bounding_box
             x1 = bbox.origin_x
             y1 = bbox.origin_y
@@ -115,7 +113,7 @@ def main():
             result_text = category_name + " (" + str(probability) + ")"
             text_location = (BBOX_MARGIN_X + x1, BBOX_MARGIN_Y + y1)
 
-            # draw bbox
+            # DRAW BBOX
             cv2.rectangle(frame, (x1, y1), (x2, y2), BBOX_COLOR, 3)
             cv2.putText(
                 frame,
@@ -127,7 +125,7 @@ def main():
                 BBOX_THICKNESS,
             )
 
-            # detect pose
+            # DETECT POSE
             frame_copy = np.copy(frame)
             cropped_frame = frame_copy[y1:y2, x1:x2]
             cropped_frame = cv2.resize(cropped_frame, (0, 0), fx=1, fy=1)
@@ -141,9 +139,12 @@ def main():
 
             pose_landmarks = pose_detection_result.pose_landmarks[0]
 
-            # draw pose
+            # DRAW POSE
+            # https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker/python#handle_and_display_results
             points = []
             for landmark in pose_landmarks:
+
+                # OPTIONAL LANDMARK CONFIDENCE FILTER
                 # if landmark.visibility < 0.5:
                 #     continue
 
