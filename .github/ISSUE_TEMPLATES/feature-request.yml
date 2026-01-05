@@ -1,0 +1,50 @@
+name: "🚀 Feature request"
+description: "Please provide as much detail as possible. Issues may be closed if they do not follow the template."
+title: "[🚀] Feature Request Title - CHANGE ME "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Describe the problem or opportunity this feature addresses.
+      placeholder: Describe your motivation here
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed Solution
+      description: Describe the feature or improvement you are suggesting.
+      placeholder: Describe your proposed solution here
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: List the conditions that must be met for this feature to be complete.
+      placeholder: |
+        1. Criteria 1
+        2. Criteria 2
+        3. Criteria 3
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional Context
+      description: Provide any relevant context or background for this request.
+    validations:
+      required: false
+
+  - type: textarea
+    id: visuals
+    attributes:
+      label: Visuals
+      description: Upload mockups, diagrams, or flows that support your request.
+    validations:
+      required: false

@@ -1,0 +1,97 @@
+name: "🐛 Bug report"
+description: "Please provide as much detail as possible. Issues may be closed if they do not follow the template."
+title: "[🐛] Bug Report Title - CHANGE ME "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: issue
+    attributes:
+      label: Issue
+      description: Describe the issue in detail and explain the problem clearly.
+      placeholder: Describe your issue here
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: List the steps to reproduce the issue.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected Behavior
+      description: Describe the outcome you expected instead of the observed issue.
+      placeholder: Describe the expected behavior here
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      description: Select the platform where the issue occurred.
+      multiple: true
+      options:
+        - Desktop
+        - Tablet
+        - Mobile
+        - Others (Specify in Additional Context)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: operating_system
+    attributes:
+      label: Operating System
+      description: Select the operating system used when the issue occurred.
+      multiple: true
+      options:
+        - Windows
+        - MacOS
+        - Linux
+        - iOS
+        - Android
+        - Others (Specify in Additional Context)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      description: Select the browser used when the issue occurred.
+      multiple: true
+      options:
+        - Chrome
+        - Brave
+        - Firefox
+        - Safari
+        - Microsoft Edge
+        - Others (Specify in Additional Context)
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional Context
+      description: Provide any relevant context or background for this issue.
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Upload screenshots or paste error messages that support your report.
+    validations:
+      required: false
